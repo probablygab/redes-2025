@@ -1,0 +1,137 @@
+version 3
+run General-0-20250616-14:09:20-27516
+attr configname General
+attr datetime 20250616-14:09:20
+attr datetimef 20250616-140920
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network VLCNetwork
+attr processid 27516
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config network VLCNetwork
+config sim-time-limit 60s
+config **.node[0].xpos 75
+config **.node[0].ypos 150
+config **.node[1].xpos 300
+config **.node[1].ypos 75
+config **.node[2].xpos 225
+config **.node[2].ypos 300
+config **.node[3].xpos 375
+config **.node[3].ypos 300
+config **.node[4].xpos 375
+config **.node[4].ypos 450
+config **.node[5].xpos 525
+config **.node[5].ypos 150
+
+par VLCNetwork.node[0].gate$o[0].channel typename "\"VLCNetwork.Channel\""
+par VLCNetwork.node[0].gate$o[0].channel disabled false
+attr mutable ""
+par VLCNetwork.node[0].gate$o[0].channel delay 0.01s
+attr mutable ""
+attr unit s
+par VLCNetwork.node[5].gate$o[0].channel typename "\"VLCNetwork.Channel\""
+par VLCNetwork.node[5].gate$o[0].channel disabled false
+attr mutable ""
+par VLCNetwork.node[5].gate$o[0].channel delay 0.01s
+attr mutable ""
+attr unit s
+par VLCNetwork.node[0].gate$o[1].channel typename "\"VLCNetwork.Channel\""
+par VLCNetwork.node[0].gate$o[1].channel disabled false
+attr mutable ""
+par VLCNetwork.node[0].gate$o[1].channel delay 0.01s
+attr mutable ""
+attr unit s
+par VLCNetwork.node[1].gate$o[0].channel typename "\"VLCNetwork.Channel\""
+par VLCNetwork.node[1].gate$o[0].channel disabled false
+attr mutable ""
+par VLCNetwork.node[1].gate$o[0].channel delay 0.01s
+attr mutable ""
+attr unit s
+par VLCNetwork.node[0].gate$o[2].channel typename "\"VLCNetwork.Channel\""
+par VLCNetwork.node[0].gate$o[2].channel disabled false
+attr mutable ""
+par VLCNetwork.node[0].gate$o[2].channel delay 0.01s
+attr mutable ""
+attr unit s
+par VLCNetwork.node[2].gate$o[0].channel typename "\"VLCNetwork.Channel\""
+par VLCNetwork.node[2].gate$o[0].channel disabled false
+attr mutable ""
+par VLCNetwork.node[2].gate$o[0].channel delay 0.01s
+attr mutable ""
+attr unit s
+par VLCNetwork.node[1].gate$o[1].channel typename "\"VLCNetwork.Channel\""
+par VLCNetwork.node[1].gate$o[1].channel disabled false
+attr mutable ""
+par VLCNetwork.node[1].gate$o[1].channel delay 0.01s
+attr mutable ""
+attr unit s
+par VLCNetwork.node[5].gate$o[1].channel typename "\"VLCNetwork.Channel\""
+par VLCNetwork.node[5].gate$o[1].channel disabled false
+attr mutable ""
+par VLCNetwork.node[5].gate$o[1].channel delay 0.01s
+attr mutable ""
+attr unit s
+par VLCNetwork.node[2].gate$o[1].channel typename "\"VLCNetwork.Channel\""
+par VLCNetwork.node[2].gate$o[1].channel disabled false
+attr mutable ""
+par VLCNetwork.node[2].gate$o[1].channel delay 0.01s
+attr mutable ""
+attr unit s
+par VLCNetwork.node[3].gate$o[0].channel typename "\"VLCNetwork.Channel\""
+par VLCNetwork.node[3].gate$o[0].channel disabled false
+attr mutable ""
+par VLCNetwork.node[3].gate$o[0].channel delay 0.01s
+attr mutable ""
+attr unit s
+par VLCNetwork.node[3].gate$o[1].channel typename "\"VLCNetwork.Channel\""
+par VLCNetwork.node[3].gate$o[1].channel disabled false
+attr mutable ""
+par VLCNetwork.node[3].gate$o[1].channel delay 0.01s
+attr mutable ""
+attr unit s
+par VLCNetwork.node[5].gate$o[2].channel typename "\"VLCNetwork.Channel\""
+par VLCNetwork.node[5].gate$o[2].channel disabled false
+attr mutable ""
+par VLCNetwork.node[5].gate$o[2].channel delay 0.01s
+attr mutable ""
+attr unit s
+par VLCNetwork.node[3].gate$o[2].channel typename "\"VLCNetwork.Channel\""
+par VLCNetwork.node[3].gate$o[2].channel disabled false
+attr mutable ""
+par VLCNetwork.node[3].gate$o[2].channel delay 0.01s
+attr mutable ""
+attr unit s
+par VLCNetwork.node[4].gate$o[0].channel typename "\"VLCNetwork.Channel\""
+par VLCNetwork.node[4].gate$o[0].channel disabled false
+attr mutable ""
+par VLCNetwork.node[4].gate$o[0].channel delay 0.01s
+attr mutable ""
+attr unit s
+par VLCNetwork.node[0] typename "\"VLCNode\""
+par VLCNetwork.node[0] xpos 75
+par VLCNetwork.node[0] ypos 150
+par VLCNetwork.node[1] typename "\"VLCNode\""
+par VLCNetwork.node[1] xpos 300
+par VLCNetwork.node[1] ypos 75
+par VLCNetwork.node[2] typename "\"VLCNode\""
+par VLCNetwork.node[2] xpos 225
+par VLCNetwork.node[2] ypos 300
+par VLCNetwork.node[3] typename "\"VLCNode\""
+par VLCNetwork.node[3] xpos 375
+par VLCNetwork.node[3] ypos 300
+par VLCNetwork.node[4] typename "\"VLCNode\""
+par VLCNetwork.node[4] xpos 375
+par VLCNetwork.node[4] ypos 450
+par VLCNetwork.node[5] typename "\"VLCNode\""
+par VLCNetwork.node[5] xpos 525
+par VLCNetwork.node[5] ypos 150
+par VLCNetwork typename "\"VLCNetwork\""
+
