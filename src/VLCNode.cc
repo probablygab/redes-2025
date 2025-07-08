@@ -14,6 +14,10 @@ class VLCNode : public cSimpleModule {
         double xpos = 0;
         double ypos = 0;
 
+        double prevX = 0.0;
+        double prevY = 0.0;
+        simtime_t lastUpdate = 0.0;
+
         std::map<int, std::pair<int, double>> routingTable;
         std::map<int, int> node2gate;
 
@@ -45,6 +49,11 @@ void VLCNode::initialize() {
     // Get own pos
     xpos = par("xpos").doubleValue();
     ypos = par("ypos").doubleValue();
+    
+    // Init prev
+    prevX = xpos;
+    prevY = ypos;
+    lastUpdate = simTime();
 
     // Add self to the routing table
     routingTable[getIndex()] = {getIndex(), 1.0};
@@ -77,6 +86,11 @@ void VLCNode::handleMessage(cMessage *msg) {
         EV << "Unknown message received: " << msg->getName() << "\n";
         delete msg;
     }
+
+    // Update prev after sending msg
+    prevX = xpos;
+    prevY = ypos;
+    lastUpdate = simTime();
 }
 
 void VLCNode::handleRREQ(VLCMsgRREQ *msg) {
@@ -307,20 +321,35 @@ bool VLCNode::updateRoute(int dest, int nextHop, double reliability) {
 }
 
 double VLCNode::updateReliability(double rel, double s_xpos, double s_ypos, int hops) {
-    const double maxDistance = 270.0;
     const double idealMaxDistance = 80.0;
     const double idealMaxHops = 3.0;
+    const double futureDelta = 1.0;  // segundos
+    const double distanceThreshold = 80.0;
 
     // Calculate distance to source
-    double distance = std::sqrt(std::pow(xpos - s_xpos, 2) + std::pow(ypos - s_ypos, 2));
+    double dist = std::sqrt(std::pow(xpos - s_xpos, 2) + std::pow(ypos - s_ypos, 2));
+    double omega = std::max(dist / idealMaxDistance, 1.0);
+    double phi = gaussian_projection(static_cast<double>(hops), idealMaxHops);
 
-    double distanceFactor = std::max(distance / idealMaxDistance, 1.0);
-    double hopsFactor = gaussian_projection(static_cast<double>(hops), idealMaxHops);
+    // Predict vel vector
+    double elapsed = simTime().dbl() - lastUpdate.dbl();
+    if (elapsed < EPSILON) elapsed = 0.1; // avoid dividing by zero
 
-    // EV << "Distance: " << distance << " units; Distance factor: " << distanceFactor << "; Hops factor: " << hopsFactor << "\n";
+    double vx = (xpos - prevX) / elapsed;
+    double vy = (ypos - prevY) / elapsed;
 
-    // Update reliability based on distance and hops
-    double updatedRel = rel * (1.0 / std::pow((distanceFactor / hopsFactor), 2));
+    // Predict pos
+    double futureX = xpos + futureDelta * vx;
+    double futureY = ypos + futureDelta * vy;
+
+    // Future distance
+    double predictedDist = std::sqrt(std::pow(futureX - s_xpos, 2) + std::pow(futureY - s_ypos, 2));
+    double gamma = std::max(predictedDist / distanceThreshold, 1.0);
+
+    // Update reliability based on distance, hops and position prediction
+    double updatedRel = rel * (1.0 / std::pow((omega / phi) * gamma, 2));
+
+    EV << "RelCalc -> omega: " << omega << ", phi: " << phi << ", gamma: " << gamma << "; rel: " << updatedRel << "\n";
 
     return updatedRel;
 }

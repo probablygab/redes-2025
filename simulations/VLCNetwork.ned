@@ -1,4 +1,4 @@
-network VLCNetwork {
+network VLCTest {
     types:
         channel Channel extends ned.DelayChannel {
             delay = 10ms;
@@ -25,4 +25,6 @@ network VLCNetwork {
 
         node[3].gate++ <--> Channel <--> node[5].gate++;
         node[3].gate++ <--> Channel <--> node[4].gate++;
+
+    controller: VLCNetwork;
 }
